@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="GltfBufferView&lt;*&gt;">
+    <DisplayString Condition="ComponentType == 5120">{{ComponentType = {ComponentType}(i8), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5121">{{ComponentType = {ComponentType}(u8), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5122">{{ComponentType = {ComponentType}(i16), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5123">{{ComponentType = {ComponentType}(u16), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5124">{{ComponentType = {ComponentType}(i32), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5125">{{ComponentType = {ComponentType}(u32), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5126">{{ComponentType = {ComponentType}(float), Count = {Count}}}</DisplayString>
+    <DisplayString Condition="ComponentType == 5127">{{ComponentType = {ComponentType}(double), Count = {Count}}}</DisplayString>
+    <Expand>
+      <CustomListItems>
+        <Variable Name="i" InitialValue="0" />
+        <Loop>
+          <Item Name="[{i}]">*($T1*)((char*)Pointer + ByteStride * i)</Item>
+          <Exec>++i</Exec>
+        </Loop>
+      </CustomListItems>
+    </Expand>
+  </Type>
+  <Type Name="Kaey::ArrayView&lt;*&gt;">
+      <DisplayString>{{Size={len}}}</DisplayString>
+      <Expand>
+          <ArrayItems>
+              <Size>len</Size>
+              <ValuePointer>ptr</ValuePointer>
+          </ArrayItems>
+      </Expand>
+  </Type>
+
+  <Type Name="half_float::half">
+    <DisplayString>
+    {
+        ((data_ &amp; 32768) == 0 ? 1 : -1) *
+        (((data_ &amp; 0x7C00) != 0 ? 1 : 0) + float(data_ &amp; 1023) / 1024) *
+        (((data_ &amp; 0x7C00) &gt;&gt; 10) - 15 &gt; 0 ? float(1 &lt;&lt; (((data_ &amp; 0x7C00) &gt;&gt; 10) - 15)) : 1 / float(1 &lt;&lt; -(((data_ &amp; 0x7C00) &gt;&gt; 10) - 15)))
+    }
+    </DisplayString>
+  </Type>
+
+  <Type Name="Kaey::Renderer::MeshAttribute">
+    <DisplayString>Attribute{{ Name={Name}, Domain={Domain}, Type={Type} }}</DisplayString>
+    <Expand>
+      <Item Name="Name">Name</Item>
+      <Item Name="Domain">Domain</Item>
+      <Item Name="Type">Type</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Boolean">   (bool*)                          Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(bool)      ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt8">     (uint8_t*)                       Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint8_t)   ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt16">    (uint16_t*)                      Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t)  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt32">    (uint32_t*)                      Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint32_t)  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Float">     (float*)                         Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float)     ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2">   (::linm::VectorN&lt;float,2&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[2])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3">   (::linm::VectorN&lt;float,3&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[3])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4">   (::linm::VectorN&lt;float,4&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[4])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2Int">(::linm::VectorN&lt;int,2&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[2])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3Int">(::linm::VectorN&lt;int,3&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[3])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4Int">(::linm::VectorN&lt;int,4&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[4])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2F16">(::linm::VectorN&lt;half_float::half,2&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[2])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3F16">(::linm::VectorN&lt;half_float::half,3&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[3])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4F16">(::linm::VectorN&lt;half_float::half,4&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[4])]</Item>
+      <Item Name="Morphs">Morphs</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Kaey::Renderer::MeshFileAttribute">
+    <DisplayString>Attribute{{ Name={Name}, Domain={Domain}, Type={Type} }}</DisplayString>
+    <Expand>
+      <Item Name="Name">Name</Item>
+      <Item Name="Domain">Domain</Item>
+      <Item Name="Type">Type</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Boolean">   (bool*)                          Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(bool)      ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt8">     (uint8_t*)                       Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint8_t)   ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt16">    (uint16_t*)                      Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t)  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::UInt32">    (uint32_t*)                      Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint32_t)  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Float">     (float*)                         Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float)     ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2">   (::linm::VectorN&lt;float,2&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[2])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3">   (::linm::VectorN&lt;float,3&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[3])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4">   (::linm::VectorN&lt;float,4&gt;*)Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(float[4])  ]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2Int">(::linm::VectorN&lt;int,2&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[2])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3Int">(::linm::VectorN&lt;int,3&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[3])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4Int">(::linm::VectorN&lt;int,4&gt;*)  Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(int32_t[4])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec2F16">(::linm::VectorN&lt;half_float::half,2&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[2])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec3F16">(::linm::VectorN&lt;half_float::half,3&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[3])]</Item>
+      <Item Name="Values" Condition="Type == Kaey::Renderer::MeshAttributeType::Vec4F16">(::linm::VectorN&lt;half_float::half,4&gt;*) Buffer._Mypair._Myval2._Myfirst,[Buffer.size() / sizeof(uint16_t[4])]</Item>
+      <Item Name="Morphs">Morphs</Item>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>

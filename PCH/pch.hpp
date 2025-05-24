@@ -1,0 +1,74 @@
+#pragma once
+
+#include <linm.hpp>
+
+#include <half.hpp>
+#include <imgui.h>
+#include <ImGuizmo.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_vulkan.h>
+#include <imgui_node_editor.h>
+#include <imnodes.h>
+#include <nameof.hpp>
+#include <slang-com-helper.h>
+#include <slang-com-ptr.h>
+#include <slang-gfx.h>
+#include <slang.h>
+#include <stb_image.h>
+#include <stb_image_write.h>
+#include <tinyexr.h>
+#include <tiny_gltf.h>
+#include <tiny_obj_loader.h>
+#include <GLFW/glfw3.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <glslang/SPIRV/GlslangToSpv.h>
+#include <magic_enum/magic_enum.hpp>
+#include <nlohmann/json.hpp>
+#include <spirv_cross/spirv_cross.hpp>
+#include <vulkan/vulkan.hpp>
+
+#include <vk_mem_alloc.h>
+#include <vulkan-memory-allocator-hpp/vk_mem_alloc.hpp>
+
+#include <algorithm>
+#include <array>
+#include <atomic>
+#include <chrono>
+#include <filesystem>
+#include <format>
+#include <fstream>
+#include <functional>
+#include <future>
+#include <iostream>
+#include <list>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <numeric>
+#include <optional>
+#include <queue>
+#include <random>
+#include <ranges>
+#include <regex>
+#include <semaphore>
+#include <set>
+#include <span>
+#include <sstream>
+#include <stack>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+#include <thread>
+#include <type_traits>
+#include <unordered_map>
+#include <unordered_set>
+#include <variant>
+
+#include <cassert>
+#include <climits>
+#include <cstddef>
+#include <cstdint>
+
+#include "Kaey/Renderer/Vulkan_FMT.hpp"
